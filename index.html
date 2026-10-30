@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kosmetik Rumah 69 | Produk Kecantikan Asli & Terpercaya</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter & Playfair Display -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fff1f2',
+                            100: '#ffe4e6',
+                            200: '#fecdd3',
+                            300: '#fda4af',
+                            400: '#fb7185',
+                            500: '#f43f5e', // Main Primary Pink
+                            600: '#e11d48',
+                            700: '#be123c',
+                        },
+                        rosegold: {
+                            light: '#f5e6e1',
+                            DEFAULT: '#d4a373',
+                            dark: '#b38253',
+                        },
+                        charcoal: '#222222'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #fda4af;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f43f5e;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="bg-gradient-to-r from-brand-600 to-rose-500 text-white text-xs md:text-sm py-2 px-4 text-center font-medium">
+        <p><i class="fa-solid fa-sparkles mr-2"></i> Promo Spesial! Diskon Hingga 50% & Gratis Ongkir Seluruh Indonesia <span class="hidden md:inline">| Kode: <b>KR69BEAUTY</b></span></p>
+    </div>
+
+    <!-- MAIN HEADER / NAVBAR -->
+    <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-rose-100 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- BRAND LOGO -->
+                <a href="#home" class="flex items-center gap-3 group">
+                    <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-500 to-rose-300 flex items-center justify-center text-white font-serif font-bold text-xl shadow-md group-hover:scale-105 transition-transform">
+                        69
+                    </div>
+                    <div>
+                        <span class="font-serif font-bold text-xl sm:text-2xl text-charcoal tracking-wide block leading-none">Kosmetik Rumah</span>
+                        <span class="text-xs font-semibold text-brand-500 tracking-widest uppercase">Beauty & Care</span>
+                    </div>
+                </a>
+
+                <!-- DESKTOP NAVIGATION -->
+                <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                    <a href="#home" class="text-brand-600 hover:text-brand-700 transition">Beranda</a>
+                    <a href="#categories" class="text-slate-600 hover:text-brand-600 transition">Kategori</a>
+                    <a href="#products" class="text-slate-600 hover:text-brand-600 transition">Produk</a>
+                    <a href="#about" class="text-slate-600 hover:text-brand-600 transition">Tentang Kami</a>
+                    <a href="#contact" class="text-slate-600 hover:text-brand-600 transition">Kontak</a>
+                </nav>
+
+                <!-- HEADER ACTIONS (Search, Cart, Wishlist, Account) -->
+                <div class="flex items-center space-x-3 sm:space-x-4">
+                    <!-- Search Input (Desktop) -->
+                    <div class="relative hidden lg:block w-48 xl:w-64">
+                        <input type="text" id="searchInput" oninput="filterProducts()" placeholder="Cari kosmetik..." class="w-full pl-9 pr-4 py-2 text-xs bg-slate-100 border border-slate-200 rounded-full focus:outline-none focus:border-brand-400 focus:bg-white transition">
+                        <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+                    </div>
+
+                    <!-- Wishlist Button -->
+                    <button onclick="toggleWishlistModal()" class="relative p-2 text-slate-600 hover:text-brand-600 hover:bg-rose-50 rounded-full transition" title="Favorit">
+                        <i class="fa-regular fa-heart text-xl"></i>
+                        <span id="wishlistCount" class="absolute top-0 right-0 bg-brand-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                    </button>
+
+                    <!-- Cart Button -->
+                    <button onclick="toggleCartDrawer()" class="relative p-2 text-slate-600 hover:text-brand-600 hover:bg-rose-50 rounded-full transition" title="Keranjang">
+                        <i class="fa-solid fa-bag-shopping text-xl"></i>
+                        <span id="cartCount" class="absolute top-0 right-0 bg-brand-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center">0</span>
+                    </button>
+
+                    <!-- Account Button -->
+                    <button onclick="showToast('Fitur login/akun akan segera hadir!')" class="hidden sm:flex items-center space-x-1 p-2 text-slate-600 hover:text-brand-600 hover:bg-rose-50 rounded-full transition">
+                        <i class="fa-regular fa-user text-xl"></i>
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="menuBtn" onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-600 hover:text-brand-600 focus:outline-none">
+                        <i id="menuIcon" class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MOBILE SEARCH BAR (Visible only on small screens) -->
+        <div class="px-4 pb-3 lg:hidden">
+            <div class="relative w-full">
+                <input type="text" id="searchInputMobile" oninput="filterProductsMobile()" placeholder="Cari skincare, lipstick, dll..." class="w-full pl-9 pr-4 py-2 text-sm bg-slate-100 border border-slate-200 rounded-full focus:outline-none focus:border-brand-400">
+                <i class="fa-solid fa-magnifying-glass absolute left-3 top-3 text-slate-400 text-xs"></i>
+            </div>
+        </div>
+
+        <!-- MOBILE MENU DROPDOWN -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-b border-rose-100 px-6 pt-2 pb-6 space-y-4 shadow-lg">
+            <a href="#home" onclick="toggleMobileMenu()" class="block font-medium text-brand-600 hover:text-brand-700">Beranda</a>
+            <a href="#categories" onclick="toggleMobileMenu()" class="block font-medium text-slate-600 hover:text-brand-600">Kategori</a>
+            <a href="#products" onclick="toggleMobileMenu()" class="block font-medium text-slate-600 hover:text-brand-600">Katalog Produk</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block font-medium text-slate-600 hover:text-brand-600">Tentang Kami</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block font-medium text-slate-600 hover:text-brand-600">Kontak</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="relative bg-gradient-to-br from-rose-50 via-white to-orange-50 pt-10 pb-16 md:py-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                
+                <!-- Hero Left Text -->
+                <div class="space-y-6 text-center md:text-left">
+                    <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-100/80 border border-rose-200 text-brand-700 text-xs font-semibold">
+                        <i class="fa-solid fa-shield-check text-brand-500"></i> 100% Produk Original & Terdaftar BPOM
+                    </div>
+                    <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl text-charcoal font-bold leading-tight">
+                        Pancarkan Pesona <br>
+                        <span class="italic text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-rose-400">Kecantikan Alami</span> Anda
+                    </h1>
+                    <p class="text-slate-600 text-sm sm:text-base leading-relaxed max-w-xl mx-auto md:mx-0">
+                        Sedia lengkap berbagai pilihan Skincare, Makeup, & Beauty Care pilihan terbaik di **Kosmetik Rumah 69**. Aman, original, dan siap merawat kulit indahmu setiap hari.
+                    </p>
+                    
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-2">
+                        <a href="#products" class="w-full sm:w-auto px-8 py-3.5 bg-brand-500 hover:bg-brand-600 text-white font-semibold rounded-full shadow-lg shadow-brand-500/30 hover:shadow-xl transition-all duration-200 text-center">
+                            Belanja Sekarang <i class="fa-solid fa-arrow-right ml-2 text-xs"></i>
+                        </a>
+                        <a href="#categories" class="w-full sm:w-auto px-8 py-3.5 bg-white hover:bg-rose-50 text-slate-700 font-semibold rounded-full border border-slate-200 shadow-sm transition-all duration-200 text-center">
+                            Lihat Promo
+                        </a>
+                    </div>
+
+                    <!-- Trust Stats -->
+                    <div class="grid grid-cols-3 gap-4 pt-6 border-t border-rose-100 max-w-md mx-auto md:mx-0 text-center md:text-left">
+                        <div>
+                            <p class="font-bold text-xl text-charcoal">10K+</p>
+                            <p class="text-xs text-slate-500">Pelanggan Puas</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-xl text-charcoal">100%</p>
+                            <p class="text-xs text-slate-500">Asli & BPOM</p>
+                        </div>
+                        <div>
+                            <p class="font-bold text-xl text-charcoal">4.9★</p>
+                            <p class="text-xs text-slate-500">Rating Toko</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Right Image Banner -->
+                <div class="relative flex justify-center">
+                    <!-- Decorative background shapes -->
+                    <div class="absolute -top-6 -right-6 w-72 h-72 bg-rose-200/50 rounded-full filter blur-3xl"></div>
+                    <div class="absolute -bottom-6 -left-6 w-72 h-72 bg-amber-100/50 rounded-full filter blur-3xl"></div>
+                    
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white max-w-md w-full bg-white">
+                        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=800&q=80" alt="Kosmetik Rumah 69 Banner" class="w-full h-[400px] object-cover hover:scale-105 transition-transform duration-500">
+                        
+                        <!-- Floating Badge -->
+                        <div class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-lg border border-white/50 flex items-center justify-between">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center text-brand-600">
+                                    <i class="fa-solid fa-wand-magic-sparkles text-lg"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-bold text-charcoal">Diskon Spesial Bulan Ini</h4>
+                                    <p class="text-[11px] text-slate-500">Hemat hingga Rp 50.000</p>
+                                </div>
+                            </div>
+                            <span class="text-xs font-bold bg-brand-500 text-white px-3 py-1 rounded-full">New</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES & BENEFITS SECTION -->
+    <section class="bg-white py-10 border-y border-rose-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="p-4 rounded-2xl hover:bg-rose-50/50 transition">
+                    <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-rose-100 flex items-center justify-center text-brand-600 text-xl">
+                        <i class="fa-solid fa-certificate"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-charcoal mb-1">100% Original</h3>
+                    <p class="text-xs text-slate-500">Jaminan garansi uang kembali</p>
+                </div>
+
+                <div class="p-4 rounded-2xl hover:bg-rose-50/50 transition">
+                    <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-rose-100 flex items-center justify-center text-brand-600 text-xl">
+                        <i class="fa-solid fa-truck-fast"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-charcoal mb-1">Pengiriman Cepat</h3>
+                    <p class="text-xs text-slate-500">Dikemas aman & rapi</p>
+                </div>
+
+                <div class="p-4 rounded-2xl hover:bg-rose-50/50 transition">
+                    <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-rose-100 flex items-center justify-center text-brand-600 text-xl">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-charcoal mb-1">Layanan 24/7</h3>
+                    <p class="text-xs text-slate-500">Konsultasi gratis produk</p>
+                </div>
+
+                <div class="p-4 rounded-2xl hover:bg-rose-50/50 transition">
+                    <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-rose-100 flex items-center justify-center text-brand-600 text-xl">
+                        <i class="fa-solid fa-tags"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-charcoal mb-1">Harga Terbaik</h3>
+                    <p class="text-xs text-slate-500">Banyak promo menarik</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CATEGORIES SECTION -->
+    <section id="categories" class="py-16 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-xs font-bold uppercase tracking-widest text-brand-600">Pilihan Terbaik</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-charcoal mt-1">Kategori Produk</h2>
+                <div class="w-16 h-1 bg-brand-500 mx-auto mt-3 rounded-full"></div>
+            </div>
+
+            <!-- Category Cards Grid -->
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+                <!-- Skincare -->
+                <div onclick="filterByCategory('Skincare')" class="group cursor-pointer bg-white rounded-2xl p-4 text-center border border-slate-100 shadow-sm hover:shadow-md hover:border-brand-300 transition-all">
+                    <div class="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden bg-rose-100">
+                        <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=300&q=80" alt="Skincare" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
+                    </div>
+                    <h3 class="font-bold text-sm text-charcoal group-hover:text-brand-600 transition">Skincare</h3>
+                    <p class="text-[11px] text-slate-400 mt-0.5">Serum, Toner, Cream</p>
+                </div>
+
+                <!-- Makeup -->
+                <div onclick="filterByCategory('Makeup')" class="group cursor-pointer bg-white rounded-2xl p-4 text-center border border-slate-100 shadow-sm hover:shadow-md hover:border-brand-300 transition-all">
+                    <div class="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden bg-rose-100">
+                        <img src="https://images.unsplash.com/photo-1512496015851-a90fb38ba796?auto=format&fit=crop&w=300&q=80" alt="Makeup" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
+                    </div>
+                    <h3 class="font-bold text-sm text-charcoal group-hover:text-brand-600 transition">Makeup</h3>
+                    <p class="text-[11px] text-slate-400 mt-0.5">Lipstick, Cushion, Powder</p>
+                </div>
+
+                <!-- Body Care -->
+                <div onclick="filterByCategory('Body Care')" class="group cursor-pointer bg-white rounded-2xl p-4 text-center border border-slate-100 shadow-sm hover:shadow-md hover:border-brand-300 transition-all">
+                    <div class="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden bg-rose-100">
+                        <img src="https://images.unsplash.com/photo-1608248597261-833258037450?auto=format&fit=crop&w=300&q=80" alt="Body Care" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
+                    </div>
+                    <h3 class="font-bold text-sm text-charcoal group-hover:text-brand-600 transition">Body Care</h3>
+                    <p class="text-[11px] text-slate-400 mt-0.5">Lotion, Body Wash, Scrub</p>
+                </div>
+
+                <!-- Hair Care -->
+                <div onclick="filterByCategory('Hair Care')" class="group cursor-pointer bg-white rounded-2xl p-4 text-center border border-slate-100 shadow-sm hover:shadow-md hover:border-brand-300 transition-all">
+                    <div class="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden bg-rose-100">
+                        <img src="https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=300&q=80" alt="Hair Care" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
+                    </div>
+                    <h3 class="font-bold text-sm text-charcoal group-hover:text-brand-600 transition">Hair Care</h3>
+                    <p class="text-[11px] text-slate-400 mt-0.5">Shampoo, Vitamin, Hair Mask</p>
+                </div>
+
+                <!-- Parfum -->
+                <div onclick="filterByCategory('Parfum')" class="group cursor-pointer bg-white rounded-2xl p-4 text-center border border-slate-100 shadow-sm hover:shadow-md hover:border-brand-300 transition-all col-span-2 sm:col-span-1">
+                    <div class="w-20 h-20 mx-auto mb-3 rounded-full overflow-hidden bg-rose-100">
+                        <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=300&q=80" alt="Parfum" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
+                    </div>
+                    <h3 class="font-bold text-sm text-charcoal group-hover:text-brand-600 transition">Parfum</h3>
+                    <p class="text-[11px] text-slate-400 mt-0.5">Eau de Parfum, Body Mist</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS CATALOG SECTION -->
+    <section id="products" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-600">Katalog Pilihan</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-charcoal mt-1">Produk Favorit Kecantikan</h2>
+                </div>
+
+                <!-- Filter Category Tabs -->
+                <div id="categoryTabs" class="flex flex-wrap gap-2 text-xs sm:text-sm">
+                    <button onclick="filterByCategory('All')" class="tab-btn active-tab px-4 py-2 rounded-full border border-brand-500 bg-brand-500 text-white font-medium transition">Semua</button>
+                    <button onclick="filterByCategory('Skincare')" class="tab-btn px-4 py-2 rounded-full border border-slate-200 bg-slate-50 text-slate-600 hover:border-brand-300 font-medium transition">Skincare</button>
+                    <button onclick="filterByCategory('Makeup')" class="tab-btn px-4 py-2 rounded-full border border-slate-200 bg-slate-50 text-slate-600 hover:border-brand-300 font-medium transition">Makeup</button>
+                    <button onclick="filterByCategory('Body Care')" class="tab-btn px-4 py-2 rounded-full border border-slate-200 bg-slate-50 text-slate-600 hover:border-brand-300 font-medium transition">Body Care</button>
+                    <button onclick="filterByCategory('Parfum')" class="tab-btn px-4 py-2 rounded-full border border-slate-200 bg-slate-50 text-slate-600 hover:border-brand-300 font-medium transition">Parfum</button>
+                </div>
+            </div>
+
+            <!-- Product Grid -->
+            <div id="productGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
+                <!-- Products will be rendered dynamically by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-16 bg-rose-50/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=800&q=80" alt="Tentang Kosmetik Rumah 69" class="rounded-3xl shadow-xl w-full h-[350px] object-cover">
+                    <div class="absolute -bottom-6 -right-6 bg-white p-6 rounded-2xl shadow-lg hidden sm:block max-w-xs border border-rose-100">
+                        <p class="text-xs text-slate-500 italic">"Menjaga dan merawat kecantikan alami kulit wanita Indonesia dengan produk berkualitas."</p>
+                        <p class="text-xs font-bold text-brand-600 mt-2">- Kosmetik Rumah 69</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <span class="text-xs font-bold uppercase tracking-widest text-brand-600">Tentang Kami</span>
+                    <h2 class="font-serif text-3xl font-bold text-charcoal">Kosmetik Rumah 69</h2>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Selamat datang di <b>Kosmetik Rumah 69</b>! Kami adalah penyedia resmi produk perawatan wajah, kosmetik, serta produk perawatan tubuh berkualitas tinggi di Indonesia.
+                    </p>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Setiap produk yang kami tawarkan telah teruji secara aman dan terdaftar di **BPOM**. Kami berkomitmen memberikan pengalaman belanja kecantikan yang mudah, terjangkau, dan terpercaya bagi Anda.
+                    </p>
+
+                    <div class="pt-2 grid grid-cols-2 gap-4 text-xs font-semibold text-slate-700">
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-check text-brand-500"></i>
+                            <span>100% Produk Original</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-check text-brand-500"></i>
+                            <span>Sertifikasi BPOM</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-check text-brand-500"></i>
+                            <span>Pengiriman Kilat</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <i class="fa-solid fa-check text-brand-500"></i>
+                            <span>Harga Bersahabat</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER & CONTACT SECTION -->
+    <footer id="contact" class="bg-charcoal text-slate-300 pt-16 pb-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-slate-800">
+                
+                <!-- Col 1: Brand Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-brand-500 flex items-center justify-center text-white font-serif font-bold text-xl">
+                            69
+                        </div>
+                        <span class="font-serif font-bold text-xl text-white">Kosmetik Rumah 69</span>
+                    </div>
+                    <p class="text-xs text-slate-400 leading-relaxed">
+                        Toko kosmetik & skincare online terpercaya. Menghadirkan produk kecantikan original untuk memancarkan kilau pesona alami kulitmu.
+                    </p>
+                    <!-- Social Media Links -->
+                    <div class="flex space-x-3 pt-2">
+                        <a href="https://www.instagram.com/rumahkosmetikkk_?vrfl=MTdtaDc1cnM2NXFnOQ==" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-brand-500 hover:text-white transition text-xs"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="https://www.tiktok.com/foryou?lang=id-ID" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-brand-500 hover:text-white transition text-xs"><i class="fa-brands fa-tiktok"></i></a>
+                        <a href="+62-813-6070-1614" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-brand-500 hover:text-white transition text-xs"><i class="fa-brands fa-whatsapp"></i></a>
+                        <a href="https://www.facebook.com/share/1CBmgcULAr/" class="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center hover:bg-brand-500 hover:text-white transition text-xs"><i class="fa-brands fa-facebook-f"></i></a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Navigasi Cepat -->
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4 border-l-2 border-brand-500 pl-3">Navigasi Cepat</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#home" class="hover:text-brand-400 transition">Beranda</a></li>
+                        <li><a href="#categories" class="hover:text-brand-400 transition">Kategori Produk</a></li>
+                        <li><a href="#products" class="hover:text-brand-400 transition">Katalog Terlaris</a></li>
+                        <li><a href="#about" class="hover:text-brand-400 transition">Tentang Kami</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Customer Care -->
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4 border-l-2 border-brand-500 pl-3">Layanan Pelanggan</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#" class="hover:text-brand-400 transition">Cara Pembelian</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition">Cek Status Pesanan</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition">Kebijakan Pengembalian</a></li>
+                        <li><a href="#" class="hover:text-brand-400 transition">Syarat & Ketentuan</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Contact Store -->
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4 border-l-2 border-brand-500 pl-3">Hubungi Kami</h4>
+                    <ul class="space-y-3 text-xs">
+                        <li class="flex items-start space-x-3">
+                            <i class="fa-solid fa-location-dot text-brand-500 mt-1"></i>
+                            <span>Jl. Suka Rejo Dusun II Desa Galang Suka, Dekli Serdang, Sumut</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-phone text-brand-500"></i>
+                            <span>+62 813-6070-1614</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa-solid fa-envelope text-brand-500"></i>
+                            <span>info@kosmetikrumah69.com</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- COPYRIGHT -->
+            <div class="pt-8 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <p>&copy; 2026 Kosmetik Rumah 69. All rights reserved.</p>
+                <div class="flex items-center space-x-4">
+                    <span class="text-slate-600">Metode Pembayaran:</span>
+                    <i class="fa-solid fa-credit-card text-slate-400 text-base"></i>
+                    <i class="fa-solid fa-building-columns text-slate-400 text-base"></i>
+                    <i class="fa-solid fa-wallet text-slate-400 text-base"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CART SIDE DRAWER MODAL -->
+    <div id="cartDrawer" class="fixed inset-0 z-50 overflow-hidden hidden">
+        <div class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity" onclick="toggleCartDrawer()"></div>
+        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-white shadow-2xl flex flex-col">
+                <!-- Cart Header -->
+                <div class="p-4 sm:p-6 bg-slate-50 border-b flex items-center justify-between">
+                    <h3 class="font-serif font-bold text-lg text-charcoal flex items-center">
+                        <i class="fa-solid fa-bag-shopping text-brand-500 mr-2"></i> Keranjang Belanja
+                    </h3>
+                    <button onclick="toggleCartDrawer()" class="text-slate-400 hover:text-slate-600 p-2">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Cart Items List -->
+                <div id="cartItemsList" class="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4">
+                    <!-- Dynamic cart items will render here -->
+                </div>
+
+                <!-- Cart Footer -->
+                <div class="p-4 sm:p-6 border-t bg-slate-50 space-y-4">
+                    <div class="flex justify-between items-center text-sm font-semibold">
+                        <span class="text-slate-600">Total Pembayaran:</span>
+                        <span id="cartTotal" class="text-lg text-brand-600 font-bold">Rp 0</span>
+                    </div>
+                    <button onclick="checkoutWhatsApp()" class="w-full py-3.5 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded-full shadow-lg shadow-brand-500/30 transition text-center flex items-center justify-center">
+                        <i class="fa-brands fa-whatsapp text-lg mr-2"></i> Beli via WhatsApp
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-charcoal text-white text-xs sm:text-sm px-5 py-3 rounded-full shadow-2xl z-50 flex items-center space-x-2 transform translate-y-20 opacity-0 transition-all duration-300">
+        <i class="fa-solid fa-circle-check text-brand-400 text-lg"></i>
+        <span id="toastMsg">Produk berhasil ditambahkan!</span>
+    </div>
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script>
+        // SAMPLE PRODUCTS DATA
+        const productsData = [
+            {
+                id: 1,
+                name: "Glow Serum Vitamin C 30ml",
+                category: "Skincare",
+                price: 85000,
+                rating: 4.9,
+                reviews: 128,
+                image: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=500&q=80",
+                badge: "Terlaris"
+            },
+            {
+                id: 2,
+                name: "Velvet Matte Lipstick Rose",
+                category: "Makeup",
+                price: 49000,
+                rating: 4.8,
+                reviews: 95,
+                image: "https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=500&q=80",
+                badge: "Diskon 10%"
+            },
+            {
+                id: 3,
+                name: "Hydrating Facial Cleanser 100ml",
+                category: "Skincare",
+                price: 65000,
+                rating: 4.7,
+                reviews: 210,
+                image: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=500&q=80",
+                badge: "BPOM"
+            },
+            {
+                id: 4,
+                name: "Eau De Parfum Vanilla Bloom 50ml",
+                category: "Parfum",
+                price: 125000,
+                rating: 5.0,
+                reviews: 64,
+                image: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=500&q=80",
+                badge: "Premium"
+            },
+            {
+                id: 5,
+                name: "Brightening Body Lotion Sakura",
+                category: "Body Care",
+                price: 78000,
+                rating: 4.8,
+                reviews: 142,
+                image: "https://images.unsplash.com/photo-1608248597261-833258037450?auto=format&fit=crop&w=500&q=80",
+                badge: "Best Value"
+            },
+            {
+                id: 6,
+                name: "Cushion Flawless Cover Natural",
+                category: "Makeup",
+                price: 110000,
+                rating: 4.9,
+                reviews: 88,
+                image: "https://images.unsplash.com/photo-1599733589046-10c005739ef9?auto=format&fit=crop&w=500&q=80",
+                badge: "Populer"
+            },
+            {
+                id: 7,
+                name: "Sunscreen SPF 50 PA++++",
+                category: "Skincare",
+                price: 75000,
+                rating: 4.9,
+                reviews: 312,
+                image: "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?auto=format&fit=crop&w=500&q=80",
+                badge: "Must Have"
+            },
+            {
+                id: 8,
+                name: "Hair Serum Argan Oil 60ml",
+                category: "Hair Care",
+                price: 92000,
+                rating: 4.7,
+                reviews: 53,
+                image: "https://images.unsplash.com/photo-1527799820374-dcf8d9d4a388?auto=format&fit=crop&w=500&q=80",
+                badge: "BPOM"
+            }
+        ];
+
+        // STATE VARIABLES
+        let cart = [];
+        let wishlist = [];
+        let activeCategory = 'All';
+
+        // INITIALIZATION
+        window.onload = function () {
+            renderProducts(productsData);
+        };
+
+        // FORMAT CURRENCY
+        function formatRupiah(amount) {
+            return 'Rp ' + amount.toLocaleString('id-ID');
+        }
+
+        // RENDER PRODUCTS GRID
+        function renderProducts(items) {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+
+            if (items.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12 text-slate-400">
+                        <i class="fa-solid fa-box-open text-4xl mb-2"></i>
+                        <p>Produk tidak ditemukan.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            items.forEach(prod => {
+                const isWishlisted = wishlist.includes(prod.id);
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group";
+                
+                card.innerHTML = `
+                    <div class="relative overflow-hidden bg-slate-100">
+                        <img src="${prod.image}" alt="${prod.name}" class="w-full h-48 sm:h-56 object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-brand-600 text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm">
+                            ${prod.badge}
+                        </span>
+                        <button onclick="toggleWishlist(${prod.id})" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur-md flex items-center justify-center text-slate-400 hover:text-brand-500 shadow-sm transition">
+                            <i class="${isWishlisted ? 'fa-solid fa-heart text-brand-500' : 'fa-regular fa-heart'} text-sm"></i>
+                        </button>
+                    </div>
+
+                    <div class="p-4 flex-1 flex flex-col justify-between">
+                        <div>
+                            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider">${prod.category}</span>
+                            <h3 class="font-semibold text-sm text-charcoal line-clamp-2 mt-1 mb-2 group-hover:text-brand-600 transition">${prod.name}</h3>
+                            
+                            <div class="flex items-center space-x-1 text-amber-400 text-xs mb-2">
+                                <i class="fa-solid fa-star"></i>
+                                <span class="text-slate-600 font-bold ml-1">${prod.rating}</span>
+                                <span class="text-slate-400 text-[10px]">(${prod.reviews})</span>
+                            </div>
+                        </div>
+
+                        <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+                            <span class="font-bold text-sm sm:text-base text-brand-600">${formatRupiah(prod.price)}</span>
+                            <button onclick="addToCart(${prod.id})" class="p-2.5 bg-rose-50 text-brand-600 hover:bg-brand-500 hover:text-white rounded-xl transition shadow-sm">
+                                <i class="fa-solid fa-plus text-xs"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // FILTER PRODUCTS BY CATEGORY
+        function filterByCategory(category) {
+            activeCategory = category;
+            
+            // Update Active Tab Style
+            const tabs = document.querySelectorAll('.tab-btn');
+            tabs.forEach(tab => {
+                if (tab.innerText === category || (category === 'All' && tab.innerText === 'Semua')) {
+                    tab.className = "tab-btn active-tab px-4 py-2 rounded-full border border-brand-500 bg-brand-500 text-white font-medium transition";
+                } else {
+                    tab.className = "tab-btn px-4 py-2 rounded-full border border-slate-200 bg-slate-50 text-slate-600 hover:border-brand-300 font-medium transition";
+                }
+            });
+
+            if (category === 'All') {
+                renderProducts(productsData);
+            } else {
+                const filtered = productsData.filter(p => p.category === category);
+                renderProducts(filtered);
+            }
+        }
+
+        // SEARCH FILTER
+        function filterProducts() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = productsData.filter(p => p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
+            renderProducts(filtered);
+        }
+
+        function filterProductsMobile() {
+            const query = document.getElementById('searchInputMobile').value.toLowerCase();
+            const filtered = productsData.filter(p => p.name.toLowerCase().includes(query) || p.category.toLowerCase().includes(query));
+            renderProducts(filtered);
+        }
+
+        // CART LOGIC
+        function addToCart(id) {
+            const product = productsData.find(p => p.id === id);
+            const existIndex = cart.findIndex(item => item.id === id);
+
+            if (existIndex > -1) {
+                cart[existIndex].qty += 1;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+
+            updateCartUI();
+            showToast(`${product.name} ditambahkan ke keranjang!`);
+        }
+
+        function updateCartUI() {
+            // Update Count Badge
+            const totalItems = cart.reduce((sum, item) => sum + item.qty, 0);
+            document.getElementById('cartCount').innerText = totalItems;
+
+            // Render Cart List
+            const cartList = document.getElementById('cartItemsList');
+            cartList.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartList.innerHTML = `
+                    <div class="text-center py-12 text-slate-400">
+                        <i class="fa-solid fa-basket-shopping text-4xl mb-2"></i>
+                        <p class="text-sm">Keranjang Anda masih kosong.</p>
+                    </div>
+                `;
+                document.getElementById('cartTotal').innerText = formatRupiah(0);
+                return;
+            }
+
+            let grandTotal = 0;
+
+            cart.forEach(item => {
+                const itemTotal = item.price * item.qty;
+                grandTotal += itemTotal;
+
+                const div = document.createElement('div');
+                div.className = "flex items-center space-x-3 p-3 bg-slate-50 rounded-xl border border-slate-100";
+                div.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="w-14 h-14 object-cover rounded-lg">
+                    <div class="flex-1">
+                        <h4 class="text-xs font-semibold text-charcoal line-clamp-1">${item.name}</h4>
+                        <p class="text-xs text-brand-600 font-bold mt-0.5">${formatRupiah(item.price)}</p>
+                        <div class="flex items-center space-x-2 mt-2">
+                            <button onclick="changeQty(${item.id}, -1)" class="w-5 h-5 bg-white border border-slate-200 rounded flex items-center justify-center text-xs font-bold text-slate-600">-</button>
+                            <span class="text-xs font-bold">${item.qty}</span>
+                            <button onclick="changeQty(${item.id}, 1)" class="w-5 h-5 bg-white border border-slate-200 rounded flex items-center justify-center text-xs font-bold text-slate-600">+</button>
+                        </div>
+                    </div>
+                    <button onclick="removeFromCart(${item.id})" class="text-slate-400 hover:text-rose-500 p-1">
+                        <i class="fa-solid fa-trash-can text-sm"></i>
+                    </button>
+                `;
+                cartList.appendChild(div);
+            });
+
+            document.getElementById('cartTotal').innerText = formatRupiah(grandTotal);
+        }
+
+        function changeQty(id, delta) {
+            const index = cart.findIndex(item => item.id === id);
+            if (index > -1) {
+                cart[index].qty += delta;
+                if (cart[index].qty <= 0) {
+                    cart.splice(index, 1);
+                }
+            }
+            updateCartUI();
+        }
+
+        function removeFromCart(id) {
+            cart = cart.filter(item => item.id !== id);
+            updateCartUI();
+        }
+
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cartDrawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        // WISHLIST LOGIC
+        function toggleWishlist(id) {
+            const index = wishlist.indexOf(id);
+            if (index > -1) {
+                wishlist.splice(index, 1);
+                showToast("Dihapus dari favorit.");
+            } else {
+                wishlist.push(id);
+                showToast("Ditambahkan ke favorit!");
+            }
+            document.getElementById('wishlistCount').innerText = wishlist.length;
+            renderProducts(productsData);
+        }
+
+        function toggleWishlistModal() {
+            showToast(`Anda memiliki ${wishlist.length} item favorit.`);
+        }
+
+        // WHATSAPP CHECKOUT LOGIC
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                showToast("Keranjang Anda masih kosong!");
+                return;
+            }
+
+            let message = "Halo Kosmetik Rumah 69, saya ingin memesan:\n\n";
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                const subtotal = item.price * item.qty;
+                total += subtotal;
+                message += `${index + 1}. ${item.name} (${item.qty}x) = ${formatRupiah(subtotal)}\n`;
+            });
+
+            message += `\n*Total*: ${formatRupiah(total)}\n\nMohon info proses pembayarannya. Terima kasih!`;
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/6281360701614?text=${encodedMessage}`, '_blank');
+        }
+
+        // MOBILE MENU TOGGLE
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('menuIcon');
+            menu.classList.toggle('hidden');
+
+            if (menu.classList.contains('hidden')) {
+                icon.className = 'fa-solid fa-bars text-2xl';
+            } else {
+                icon.className = 'fa-solid fa-xmark text-2xl';
+            }
+        }
+
+        // TOAST NOTIFICATION UTILITY
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMsg');
+            toastMsg.innerText = message;
+
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
